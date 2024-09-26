@@ -20,7 +20,13 @@ Then switch to Manual
 5. <img src="photos\new_address.png" alt="What to input">
 Input IP Address: 192.168.1 and Subnet mask 255.255.255.0 and click save.
 
+6. Ensure that the AC control box is plugged into the Ethernet port in the wall for IP connection.
 
+7. Once everything is set up, you can connect and will be greeted with the following screen:
+
+<img src="photos\UFactorypage.png" alt="Greet page for UFACTORY">
+
+From here, you will have complete control of the arm for live control, and programming.
 
 
 
