@@ -46,7 +46,8 @@ void update_measurement() {
   for (int i=0;i<number_of_sensors;i++) {
     FDC.configureMeasurementSingle(Sensors[i].channel, Sensors[i].channel,hardware_offset);
     FDC.triggerSingleMeasurement(Sensors[i].channel, FDC1004_100HZ);
-    delay(20);
+    // delay(10);
+    delay(100);
     uint16_t value[2];
     if (!FDC.readMeasurement(Sensors[i].channel, value)) {
       // add the current measurement to the window and compute the new average
@@ -106,6 +107,7 @@ void loop() {
   debug();
   if (analogRead(A0) > 200) {
     ZeroScale();
+    // delay(10);
   }
 }
 

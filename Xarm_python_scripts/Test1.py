@@ -30,6 +30,20 @@ time.sleep(2)
 
 while True:
     line = ser.readline().decode('utf-8').strip()
+    if line:
+        try:
+            value = int(line)
+            print(value)
+            if value >= 10000:
+                pass
+            elif value >= 800:
+                arm.set_servo_angle(angle=[0,0,0,0,0,0], speed=speed, wait=True)
+                # arm.set_servo_angle(angle=[0,0,-90,0,0,0])
+                # print(arm.get_servo_angle())
+            else:
+                arm.set_servo_angle(angle=[0,0,-90,0,0,0])
+        except ValueError:
+            print("Invalid input received!")
 
 
 arm.disconnect()
