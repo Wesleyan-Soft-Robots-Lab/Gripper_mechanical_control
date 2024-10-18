@@ -16,11 +16,10 @@ arm = XArmAPI(ip)
 arm.motion_enable(enable=True)
 arm.set_mode(0)
 arm.set_state(state=0)
-
 speed = 100
 arm.move_gohome(speed=speed, wait=True)
 
-arm.set_servo_angle(angle=[-100,0,0,0,0,0], speed=speed, wait=True)
+arm.set_servo_angle(angle=[0,0,0,0,0,0], speed=speed, wait=True)
 #arm.set_servo_angle(angle=[0,0,0,0,0,0], speed=speed, wait=True)
 print(arm.get_servo_angle(), arm.get_servo_angle(is_radian=True))
 
