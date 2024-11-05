@@ -13,35 +13,50 @@ times = np.array([])
 start_time = time.time()
 # times = np.append(times, start_time-start_time)
 # print)
-while time.time()-start_time<40:
+while time.time()-start_time-15<10:
     line = ser.readline().decode('utf-8').strip()
     if line:
         try:
-            curr_time = time.time()-start_time
+            curr_time = time.time()-start_time-15
             times = np.append(times, curr_time)
             value = int(line)
             readings = np.append(readings, value)
             print(value, curr_time)
         except ValueError:
             print("Invalid data received")
-# print(times, readings)
+# print(len(times), len(readings))
+# times = np.ravel(times)
+# readings = np.ravel(readings)
+mask = times >= 0
+times = times[mask]
+readings = readings[mask]
 fig, ax = plt.subplots()
+ax.plot(times, readings, label='Capacitance over time')
 point, = ax.plot([],[],'ro')
-ax.plot(times, readings)
 ax.set_xlabel('Time')
 ax.set_ylabel('Capacitance')
-ax.set_xlim(15,40) 
-ax.set_ylim(-2000,6000)
+ax.set_xlim(np.min(times), np.max(times)) 
+ax.set_ylim(np.min(readings)-1, np.max(readings) + 1)
 ax.legend()
+
+print('times shape: ', times.shape)
+print('readings shape: ', readings.shape)
 
 def init():
     point.set_data([],[])
     return point,
 
 def animate(i):
-    point.set_data(times[i], readings[i])
+    # print(times[i], readings[i])
+    if i < len(times) and i < len(readings):
+        x_val = float(times[i])
+        y_val = float(readings[i])
+        print(f"Animating point at ({x_val}, {y_val})")
+        point.set_data([x_val], [y_val])
     return point,
 
-ani = FuncAnimation(fig, animate, frames = len(times)-15, init_func=init, blit=True)
+ani = FuncAnimation(fig, animate, frames = len(times), init_func=init, blit=True)
 
-plt.show()
+ani.save('animation.gif', writer="pillow", fps=30)
+
+# plt.show()
