@@ -3,8 +3,11 @@ import time
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import numpy as np
+import os
 
+output_dir = r"C:\Users\softrobotslab\Gripper_mechanical_control\Data"
 
+output_path = os.path.join(output_dir, "demonstration_0.gif")
 ser = serial.Serial('COM4', 9600)
 time.sleep(2)
 
@@ -33,11 +36,11 @@ readings = readings[mask]
 fig, ax = plt.subplots()
 ax.plot(times, readings, label='Capacitance over time')
 point, = ax.plot([],[],'ro')
-ax.set_xlabel('Time')
-ax.set_ylabel('Capacitance')
+ax.set_xlabel('Time (s)')
+ax.set_ylabel('Capacitance (F)')
 ax.set_xlim(np.min(times), np.max(times)) 
 ax.set_ylim(np.min(readings)-1, np.max(readings) + 1)
-ax.legend()
+# ax.legend()
 
 print('times shape: ', times.shape)
 print('readings shape: ', readings.shape)
@@ -51,12 +54,13 @@ def animate(i):
     if i < len(times) and i < len(readings):
         x_val = float(times[i])
         y_val = float(readings[i])
-        print(f"Animating point at ({x_val}, {y_val})")
+        # print(f"Animating point at ({x_val}, {y_val})")
         point.set_data([x_val], [y_val])
     return point,
 
 ani = FuncAnimation(fig, animate, frames = len(times), init_func=init, blit=True)
 
-ani.save('animation.gif', writer="pillow", fps=30)
+ani.save(output_path, writer="pillow", fps=30)
+
 
 # plt.show()
