@@ -9,7 +9,7 @@ import os
 
 output_dir = r"C:\Users\softrobotslab\Gripper_mechanical_control\Data"
 
-output_path = os.path.join(output_dir, "demonstration_0.gif")
+output_path = os.path.join(output_dir, "demonstration_2.gif")
 
 ip = '192.168.1.232'
 
@@ -29,6 +29,7 @@ readings = np.array([])
 times = np.array([])
 start_time = time.time()
 
+touched = 2500
 
 while time.time()-start_time-17<10:
     line = ser.readline().decode('utf-8').strip()
@@ -37,36 +38,42 @@ while time.time()-start_time-17<10:
             curr_time = time.time()-start_time-17
             times = np.append(times, curr_time)
             value = int(line)
-            readings = np.append(readings, value)
+            if value >= touched:
+                readings = np.append(readings, 1.0)
+            else:
+                readings = np.append(readings, 0.0)
+            # readings = np.append(readings, value)
             print(value, curr_time)
             
             if value >= 10000:
                 pass
-            elif value >= 2500:
+            elif value >= touched:
                 arm.set_servo_angle(angle=[30, 0, -10, 0,0,0], speed=speed)
+                # times = np.append(times, curr_time)
+                # readings = np.append(readings, 1)
             # elif value >= 1500:
             #     arm.set_servo_angle(angle=[15, 0,-10,0,0,0], speed=speed/2)
             else:
                 arm.set_servo_angle(angle=[-45, 0,-10, 0,0,0], speed=speed/2)
+                # np.append(times, curr_time)
+                # readings = np.append(readings, 0)
         except ValueError:
             print('Invalid input received')
 
 arm.disconnect()
-
+# print(times.shape, readings.shape)
 mask = times >= 0
 times = times[mask]
 readings = readings[mask]
+# print(times.shape, readings.shape)
 fig, ax = plt.subplots()
-ax.plot(times, readings)
+ax.plot(times, readings, label="0.0 = Untouched; 1.0 = Touched")
 point, = ax.plot([],[],'ro')
 ax.set_xlabel('Time (s)')
-ax.set_ylabel('Capacitance (F)')
+ax.set_ylabel('Touch')
 ax.set_xlim(np.min(times), np.max(times)) 
 ax.set_ylim(np.min(readings)-1, np.max(readings) + 1)
 # ax.legend()
-
-# print('times shape: ', times.shape)
-# print('readings shape: ', readings.shape)
 
 def init():
     point.set_data([],[])
