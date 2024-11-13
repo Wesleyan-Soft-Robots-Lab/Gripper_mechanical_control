@@ -52,15 +52,16 @@ The corresponding angles are correspond to the following joints:
 <img src="xarm_img\xarm_img2.jpg" alt="Xarm Servos 2">
 
 The following images give a general idea of the direction according to the angles of the servos:
-<img src="xarm_img\Servo1&2.jpg" alt="Servo 1 and 2">
 
-<img src="xarm_img\Servo3.jpg" alt="Servo 3">
+<img src="xarm_img\Servo1&2.JPG" alt="Servo 1 and 2">
 
-<img src="xarm_img\Servo4.jpg" alt="Servo 4">
+<img src="xarm_img\Servo3.JPG" alt="Servo 3">
 
-<img src="xarm_img\Servo5.jpg" alt="Servo 5">
+<img src="xarm_img\Servo4.JPG" alt="Servo 4">
 
-<img src="xarm_img\Servo6.jpg" alt="Servo 6">
+<img src="xarm_img\Servo5.JPG" alt="Servo 5">
+
+<img src="xarm_img\Servo6.JPG" alt="Servo 6">
 
 
 6. IMPORTANT CONSIDERATION FOR MOVEMENT
