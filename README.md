@@ -2,8 +2,8 @@
 
 ## Table of Contents
 
--[Directory] (#directory)
--[Contributions] (#contributions)
+- [Directory](#directory)
+- [Contributions](#contributions)
 
 ## Directory
 ```
