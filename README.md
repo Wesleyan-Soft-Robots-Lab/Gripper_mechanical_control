@@ -5,7 +5,7 @@
 -[Directory] (#directory)
 -[Contributions] (#contributions)
 
-# #Directory
+## Directory
 ```
 0.0.0 |- README.md              <-- you are here
 1.0.0 |- Arduino_Python                            #Connection from Arduino to Python
